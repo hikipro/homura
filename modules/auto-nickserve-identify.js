@@ -1,6 +1,7 @@
 'use strict';
 
 function AutoNickServeIdentify(options) {
+    this.name = options.name;
     this.passwords = options.passwords;
 }
 
