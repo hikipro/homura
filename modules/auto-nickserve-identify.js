@@ -10,7 +10,7 @@ AutoNickServeIdentify.prototype.handleIrcClient = function(ircClient, bouncer) {
         var account = this.accounts[ bouncer.name ];
 
         var nickserv = account.nickserv || 'NickServ';
-        var command = account.command || 'IDENTIFY'
+        var command = account.command || 'IDENTIFY';
         var nick = account.nick || ircClient.nick;
         var password = account.password;
 
