@@ -5,7 +5,7 @@
     "description": "IRC bouncer written in JavaScript for Node.js.",
     "keywords" : [ "irc" ],
     "license" : "MIT",
-    "author" : { 
+    "author" : {
         "name" : "Yohei Fushii",
         "email" : "hakobe@gmail.com",
         "url" : "http://hakobe932.hatenablog.com/"
@@ -20,7 +20,7 @@
         "test"  : "mocha"
     },
     "dependencies" : {
-        "iconv" : "~2.0.6",
+        "iconv-lite": "^0.4.13",
         "nopt"  : "~2.1.1"
     },
     "devDependencies" : {
