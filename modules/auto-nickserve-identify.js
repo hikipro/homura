@@ -9,7 +9,8 @@ AutoNickServeIdentify.prototype.handleIrcClient = function(ircClient, bouncer) {
     if ( this.accounts[ bouncer.name ] ) {
         var account = this.accounts[ bouncer.name ];
 
-        var nickserv = account.nickserv || "NickServ";
+        var nickserv = account.nickserv || 'NickServ';
+        var command = account.command || 'IDENTIFY'
         var nick = account.nick || ircClient.nick;
         var password = account.password;
 
@@ -20,7 +21,7 @@ AutoNickServeIdentify.prototype.handleIrcClient = function(ircClient, bouncer) {
         ircClient.on('register', (function () {
             ircClient.send( 'PRIVMSG', [
                 nickserv,
-                'IDENTIFY ' + (nick ? nick + " " : "") + password
+                command + ' ' + (nick ? nick + " " : "") + password
             ]);
         }).bind(this));
     }
