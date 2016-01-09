@@ -2,16 +2,25 @@
 
 function AutoNickServeIdentify(options) {
     this.name = options.name;
-    this.passwords = options.passwords;
+    this.accounts = options.accounts;
 }
 
 AutoNickServeIdentify.prototype.handleIrcClient = function(ircClient, bouncer) {
-    if ( this.passwords[ bouncer.name ] ) {
-        var password = this.passwords[ bouncer.name ];
+    if ( this.accounts[ bouncer.name ] ) {
+        var account = this.accounts[ bouncer.name ];
+
+        var nickserv = account.nickserv || "NickServ";
+        var nick = account.nick || ircClient.nick;
+        var password = account.password;
+
+        if (!password) {
+			return;
+		}
+
         ircClient.on('register', (function () {
             ircClient.send( 'PRIVMSG', [
-                'NickServ',
-                'identify ' + password
+                nickserv,
+                'IDENTIFY ' + (nick ? nick + " " : "") + password
             ]);
         }).bind(this));
     }

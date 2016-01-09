@@ -128,8 +128,12 @@ $ homura --config /path/to/your_config.json
         },
         {
             "name"     : "auto-nickserve-identify",
-            "passwords" : {
-                "freenode" : "PASSWORD"
+            "accounts" : {
+                "freenode" : {
+                    "nickserv" : "NickServ",
+                    "nick": "YOUR_NICK",
+                    "password": "YOUR_PASSWORD"
+                }
             }
         }
     ]
