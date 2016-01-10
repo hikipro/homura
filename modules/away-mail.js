@@ -18,6 +18,9 @@ AwayMail.prototype.handleIrcClient = function( ircClient, bouncer ) {
     }
 
     ircClient.on('privmsg', (function( message ) {
+		if (!message.params[1]) {
+			return;
+		}
         if (!message.params[1].startsWith(ircClient.nick)) {
             return;
         }
