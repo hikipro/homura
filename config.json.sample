@@ -16,7 +16,7 @@
             "user"     : "YOURUSER",
             "real"     : "YOURNAME",
             "tls"      : {
-              "ca_file"  : "/absolute/path/to/your/ca.pem"
+                "ca_file" : "/absolute/path/to/your/ca.pem"
             }
         },
         {
@@ -35,9 +35,29 @@
             "dir"  : "/path/to/logs"
         },
         {
-            "name" : "auto-join",
+            "name" : "log-buffer",
+            "size" : 100
+        },
+        {
+            "name"     : "auto-nickserve-identify",
+            "accounts" : {
+                "freenode" : {
+                    "nickserv" : "NickServ",
+                    "nick"     : "your_nick",
+                    "password" : "your_password"
+                }
+            }
+        },
+        {
+            "name" : "auto-user-mode",
+            "mode" : {
+                "freenode" : "+x"
+            }
+        },
+        {
+            "name"     : "auto-join",
             "channels" : {
-                "freenode" : [ "#autojoinchan1", "#autojoinchan2" ],
+                "freenode" : [ "#autojoinchan1 passwordchan1", "#autojoinchan2" ],
                 "ircnet"   : [ "#autojoinchan3" ]
             }
         },
@@ -49,13 +69,14 @@
             "message" : "inaiyo-"
         },
         {
-            "name" : "log-buffer",
-            "size" : 100
+            "name" : "away-nick",
+            "awayNick" : "YOURNICK_AWAY"
         },
         {
-            "name"     : "auto-nickserve-identify",
-            "passwords" : {
-                "freenode" : "PASSWORD"
+            "name"    : "away-mail",
+            "address" : {
+                "from" : "Akemi Homura <akemi@homura>",
+                "to"   : "yourmail@example.com"
             }
         }
     ]

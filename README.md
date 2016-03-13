@@ -109,7 +109,22 @@ $ homura --config /path/to/your_config.json
             "size" : 100
         },
         {
-            "name" : "auto-join",
+            "name"     : "auto-nickserve-identify",
+            "accounts" : {
+                "freenode" : {
+                    "nick"     : "your_nick",
+                    "password" : "your_password"
+                }
+            }
+        },
+        {
+            "name" : "auto-user-mode",
+            "mode" : {
+                "freenode" : "+x"
+            }
+        },
+        {
+            "name"     : "auto-join",
             "channels" : {
                 "freenode" : [ "#autojoinchan1 passwordchan1", "#autojoinchan2" ],
                 "ircnet"   : [ "#autojoinchan3" ]
@@ -119,21 +134,18 @@ $ homura --config /path/to/your_config.json
             "name" : "auto-reply"
         },
         {
-            "name" : "auto-away",
-            "message" : "oh I'm away from a keyborad"
+            "name"    : "auto-away",
+            "message" : "inaiyo-"
         },
         {
             "name" : "away-nick",
             "awayNick" : "YOURNICK_AWAY"
         },
         {
-            "name"     : "auto-nickserve-identify",
-            "accounts" : {
-                "freenode" : {
-                    "nickserv" : "NickServ",
-                    "nick": "YOUR_NICK",
-                    "password": "YOUR_PASSWORD"
-                }
+            "name"    : "away-mail",
+            "address" : {
+                "from" : "Akemi Homura <akemi@homura>",
+                "to"   : "yourmail@example.com"
             }
         }
     ]
