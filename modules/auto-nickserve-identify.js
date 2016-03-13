@@ -15,8 +15,8 @@ AutoNickServeIdentify.prototype.handleIrcClient = function(ircClient, bouncer) {
         var password = account.password;
 
         if (!password) {
-			return;
-		}
+            return;
+        }
 
         ircClient.on('register', (function () {
             ircClient.send( 'PRIVMSG', [

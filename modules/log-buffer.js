@@ -3,6 +3,7 @@
 function LogBuffer(options) {
     this.name = options.name;
     this.size = options.size || 30;
+    this.usePrivmsg = options.use_privmsg;
 
     this.buffers = {};
 }
@@ -14,7 +15,11 @@ LogBuffer.prototype.handleBouncer = function( bouncer ) {
         Object.keys( this.buffers[ bouncer.name ] ).forEach( (function( target ) {
             if ( this.buffers[ bouncer.name ][ target ] ) {
                 this.buffers[ bouncer.name ][ target ].forEach( (function( text ) {
-                    session.send( session.serverName, 'NOTICE', [ target, text ] );
+                    if (this.usePrivmsg) {
+                        session.send( session.serverName, 'PRIVMSG', [ target, text ] );
+                    } else {
+                        session.send( session.serverName, 'NOTICE', [ target, text ] );
+                    }
                 }).bind(this) );
             }
         }).bind(this) );
@@ -47,16 +52,22 @@ LogBuffer.prototype.bufferLog = function( bouncerName, text, target ) {
         this.buffers[ bouncerName ][ target ].shift();
     }
 
-    var date = new Date();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var seconds  = date.getSeconds();
+    var dateObj = new Date();
+    var month = dateObj.getMonth() + 1;
+    var date = dateObj.getDate();
+    var hours = dateObj.getHours();
+    var minutes = dateObj.getMinutes();
+    var seconds  = dateObj.getSeconds();
 
-    this.buffers[ bouncerName ][ target ].push( 
+    this.buffers[ bouncerName ][ target ].push(
         [
-            ( hours   < 10 ? '0' + hours    : hours    ),
-            ( minutes < 10 ? '0' + minutes  : minutes  ),
-            ( seconds < 10 ? '0' + seconds  : seconds  )
+            ( month   < 10 ? '0' + month    : month   ),
+            ( date    < 10 ? '0' + date     : date    )
+        ].join('-') +' ' +
+        [
+            ( hours   < 10 ? '0' + hours    : hours   ),
+            ( minutes < 10 ? '0' + minutes  : minutes ),
+            ( seconds < 10 ? '0' + seconds  : seconds )
         ].join(':') + ' ' + text
     );
 }
