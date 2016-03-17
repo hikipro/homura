@@ -127,11 +127,23 @@ Log.prototype.handleUserSession = function( userSession, bouncer ) {
 Log.prototype.putLog = function( line, bouncerName, target ) {
     var date = new Date();
 
+    var logPath = this.pathFor(this.format, date, bouncerName, target);
+
+    var logPathArr = logPath.split('/');
+    var pathTmp = "/";
+
+    for (var i=0; i<logPathArr.length-1; i++) {
+        pathTmp = path.join(pathTmp, logPathArr[i]);
+        if (!fs.existsSync(pathTmp)) {
+            fs.mkdirSync(pathTmp);
+        }
+    }
+
     fs.appendFile(
-        this.pathFor(this.format, date, bouncerName, target),
+        logPath,
         this.formatedTimeFor(date) + ' ' + line + "\n",
         function (err) {
-            if (err) { 
+            if (err) {
                 throw err;
             }
         }
