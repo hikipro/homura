@@ -221,6 +221,11 @@ Send NickServe Identify command automatically at start of connection
 #### Options
 - passwords : Object that contains bouncer name and password pairs.
 
+## No ping reply error in XChat/HexChat
+```
+/set net_ping_timeout 0
+```
+
 ## Author
 - @hakobe
 
